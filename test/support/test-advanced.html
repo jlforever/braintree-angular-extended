@@ -17,17 +17,17 @@
         .controller('testCtrl', ['$braintree', function($braintree) {
 
           $braintree.getClientToken()
-            .success(function(token) {
+            .then(function(token) {
 
               var client = new $braintree.api.Client({
-                clientToken: token
+                clientToken: token.data
               });
 
               if (client.tokenizeCard) {
                 window.braintreeApiInitialized = true;
               }
 
-            });
+            }).catch(function(err) {});
 
         }]);
     </script>
