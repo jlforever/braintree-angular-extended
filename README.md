@@ -102,10 +102,12 @@ angular.module('yourApp', ['braintree-angular'])
     };
 
     var startup = function() {
-      $braintree.getClientToken().success(function(token) {
+      $braintree.getClientToken().then(function(token) {
         client = new $braintree.api.Client({
-          clientToken: token
+          clientToken: token.data
         });
+      }).catch(function(err) {
+        // handle error
       });
     }
 

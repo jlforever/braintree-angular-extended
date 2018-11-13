@@ -78,21 +78,21 @@ function braintreeFactory (braintree) {
 
     $braintree.setupDropin = function (options) {
       $braintree.getClientToken()
-        .success(function (token) {
-          braintree.setup(token, 'dropin', options)
+        .then(function (token) {
+          braintree.setup(token.data, 'dropin', options)
         })
-        .error(function (data, status) {
-          console.error('error fetching client token at ' + clientTokenPath, data, status)
+        .catch(function (err, status) {
+          console.error('error fetching client token at ' + clientTokenPath, err.data, status)
         })
     }
 
     $braintree.setupPayPal = function (options) {
       $braintree.getClientToken()
-        .success(function (token) {
-          braintree.setup(token, 'paypal', options)
+        .then(function (token) {
+          braintree.setup(token.data, 'paypal', options)
         })
-        .error(function (data, status) {
-          console.error('error fetching client token at ' + clientTokenPath, data, status)
+        .error(function (err, status) {
+          console.error('error fetching client token at ' + clientTokenPath, err.data, status)
         })
     }
 
